@@ -1,11 +1,7 @@
 <template lang="pug">
     div.page.container
         h1 Welcome!
-        h2 Here are some of my projects or something like that
-        br
-        hr
-        br
-        | a
+        h2 I'm still working on the site - it's coming, I promise!
 </template>
 
 <script>
