@@ -1,0 +1,19 @@
+:root {
+    @apply overflow-y-hidden;
+
+    &,
+    body {
+        @apply font-sans min-h-screen;
+    }
+}
+
+
+body {
+    @apply bg-blue-900 text-white;
+}
+
+hr {
+    @apply w-full border-0 border-b-2 border-solid;
+
+    border-color: rgba(255, 255, 255, 0.25);
+}
