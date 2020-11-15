@@ -5,8 +5,30 @@
   "private": true,
   "license": "UNLICENSED",
   "author": "hadenpf",
+  "scripts": {
+    "build": "tsc",
+    "build:pack": "webpack",
+    "build:prod": "yarn build && cross-env NODE_ENV=production webpack && yarn build:render",
+    "build:render": "node ./build/prerender.js"
+  },
   "devDependencies": {
+    "@babel/core": "^7.12.3",
+    "@babel/preset-env": "^7.12.1",
+    "@babel/preset-react": "^7.12.5",
+    "@babel/preset-typescript": "^7.12.1",
+    "@types/mkdirp": "^1.0.1",
+    "@types/node": "^14.14.7",
+    "@types/react": "^16.9.56",
+    "@types/react-dom": "^16.9.9",
+    "babel-loader": "^8.2.1",
+    "mkdirp": "^1.0.4",
     "react": "^17.0.1",
-    "react-dom": "^17.0.1"
+    "react-dom": "^17.0.1",
+    "ts-node": "^9.0.0",
+    "webpack": "^5.4.0",
+    "webpack-cli": "^4.2.0"
+  },
+  "dependencies": {
+    "cross-env": "^7.0.2"
   }
 }

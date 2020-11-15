@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "allowJs": false,
+    "moduleResolution": "node",
+    "target": "es3",
+    "lib": ["dom", "esnext"],
+    "module": "commonjs",
+    "jsx": "preserve",
+    "esModuleInterop": false,
+    "allowSyntheticDefaultImports": false,
+    "resolveJsonModule": true
+  }
+}

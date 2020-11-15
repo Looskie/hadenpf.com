@@ -1,5 +1,5 @@
 {
-  "packages": ["components", "web", "builder"],
+  "packages": ["components", "web"],
   "version": "independent",
   "npmClient": "yarn",
   "useWorkspaces": true
