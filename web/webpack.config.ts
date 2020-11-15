@@ -12,6 +12,8 @@ const config: webpack.Configuration = {
     extensions: ['.ts', '.tsx', '.js', '.jsx'],
   },
 
+  // ensure no head gets messed up
+  externals: ['react-helmet'],
   module: {
     rules: [
       {

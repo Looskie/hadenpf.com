@@ -1,8 +1,10 @@
 import * as fs from 'fs'
 import * as path from 'path'
 import * as React from 'react'
-import * as ReactDOM from 'react-dom/server'
+import * as ReactDOMServer from 'react-dom/server'
 import * as mkdirp from 'mkdirp'
+import { Helmet } from 'react-helmet'
+import AppContainer from './app'
 
 const inputDir = path.resolve(__dirname, '../src/app')
 const buildDir = path.resolve(__dirname, '../build/app')
@@ -27,11 +29,13 @@ readdirSyncRecurse(inputDir).forEach((filePath) => {
 
   const renderPath = path.resolve(renderDir, `${filename}.html`)
 
-  const content = ReactDOM.renderToStaticMarkup(
-    React.createElement(
-      require(path.resolve(buildDir, `${filename}.js`)).default
-    )
+  const content = ReactDOMServer.renderToStaticMarkup(
+    <AppContainer>
+      {require(path.resolve(buildDir, `${filename}.js`)).default}
+    </AppContainer>
   )
+
+  const helmet = Helmet.renderStatic()
 
   try {
     // recursively make all necessary directories
@@ -41,11 +45,13 @@ readdirSyncRecurse(inputDir).forEach((filePath) => {
       renderPath,
       `\
 <!DOCTYPE html>
-<html>
+<html ${helmet.htmlAttributes.toString()}>
 		<head>
-			<title>hadenpf</title>
+			${helmet.title.toString()}
+			${helmet.meta.toString()}
+			${helmet.link.toString()}
 		</head>
-		<body>
+		<body ${helmet.bodyAttributes.toString()}>
 			<div id="root">
 				${content}
 			</div>
