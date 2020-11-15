@@ -11,7 +11,7 @@ const renderDir = path.resolve(__dirname, '../dist')
 const assetDir = path.resolve(__dirname, '../public')
 
 // path within web, not on disk
-const mainScriptPath = '/assets/main.js'
+const mainScriptPath = '/assets/0.js'
 
 if (!fs.existsSync(buildDir)) {
   console.log('Could not find built files. Please run `yarn build` or `tsc`.')
@@ -100,7 +100,7 @@ readdirSyncRecurse(assetDir).forEach((filePath) => {
   const assetPath = path.resolve(assetDir, filePath)
 
   try {
-    fs.copyFileSync(assetPath, path.resolve(renderDir, filePath))
+    fs.copyFileSync(assetPath, path.resolve(renderDir, 'assets', filePath))
   } catch (err) {
     console.log(`Could not copy static asset ${filePath}`, err)
     process.exit(1)

@@ -6,10 +6,12 @@
   "license": "UNLICENSED",
   "author": "hadenpf",
   "scripts": {
-    "build": "tsc",
-    "build:pack": "webpack",
-    "build:prod": "yarn build && cross-env NODE_ENV=production webpack && yarn build:render",
-    "build:render": "node ./build/prerender.js"
+    "build": "yarn clean && tsc",
+    "build:pack": "yarn build:paths && webpack",
+    "build:prod": "yarn build && cross-env NODE_ENV=production yarn build:pack && yarn build:render",
+    "build:render": "node ./build/prerender.js",
+    "build:paths": "yarn build:render --pre",
+    "clean": "rimraf .routes.json dist build"
   },
   "devDependencies": {
     "@babel/core": "^7.12.3",
@@ -28,6 +30,7 @@
     "react-dom": "^17.0.1",
     "react-helmet": "^6.1.0",
     "react-router-dom": "^5.2.0",
+    "rimraf": "^3.0.2",
     "ts-node": "^9.0.0",
     "webpack": "^5.4.0",
     "webpack-cli": "^4.2.0"

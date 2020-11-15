@@ -6,6 +6,8 @@ const config: webpack.Configuration = {
   entry: path.resolve(__dirname, 'src/index.tsx'),
   output: {
     path: path.resolve(__dirname, 'dist/assets'),
+    chunkFilename: '[id].js',
+    filename: (data) => (data?.chunk?.name === 'main' ? '0.js' : '[id].js'),
   },
 
   resolve: {
