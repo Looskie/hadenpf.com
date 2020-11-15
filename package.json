@@ -1,0 +1,20 @@
+{
+  "name": "@hadenpf/site",
+  "version": "1.0.0",
+  "author": "hadenpf",
+  "license": "UNLICENSED",
+  "private": true,
+  "scripts": {
+    "bootstrap": "lerna bootstrap",
+    "build": "builder/index.js"
+  },
+  "workspaces": [
+    "components",
+    "web",
+    "builder"
+  ],
+  "devDependencies": {
+    "lerna": "^3.22.1"
+  },
+  "main": "index.js"
+}

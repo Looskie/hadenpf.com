@@ -1,0 +1,6 @@
+{
+  "packages": ["components", "web", "builder"],
+  "version": "independent",
+  "npmClient": "yarn",
+  "useWorkspaces": true
+}
