@@ -1,5 +1,4 @@
 [build]
-  base = "web/"
-  publish = "dist/"
+  publish = "web/dist/"
 
-  command = "yarn build:prod"
+  command = "yarn workspace @hadenpf/web run build:prod"
