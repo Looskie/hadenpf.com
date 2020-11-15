@@ -4,37 +4,60 @@ import * as React from 'react'
 import * as ReactDOMServer from 'react-dom/server'
 import * as mkdirp from 'mkdirp'
 import { Helmet } from 'react-helmet'
-import AppContainer from './app'
 
-const inputDir = path.resolve(__dirname, '../src/app')
-const buildDir = path.resolve(__dirname, '../build/app')
+const inputDir = path.resolve(__dirname, '../src/pages')
+const buildDir = path.resolve(__dirname, '../build/pages')
 const renderDir = path.resolve(__dirname, '../dist')
 const assetDir = path.resolve(__dirname, '../public')
 
 // path within web, not on disk
-const mainScriptPath = '/main.js'
+const mainScriptPath = '/assets/main.js'
 
 if (!fs.existsSync(buildDir)) {
   console.log('Could not find built files. Please run `yarn build` or `tsc`.')
   process.exit(1)
 }
 
-readdirSyncRecurse(inputDir).forEach((filePath) => {
-  console.log(`Generating ${filePath}...`)
+const routes: string[] = []
 
+readdirSyncRecurse(inputDir).map((filePath) => {
   // get extension-less filename
   const nameArray = path.basename(filePath).split('.')
   nameArray.pop() // remove original extension
   const filename = nameArray.join('.')
 
+  routes.push(path.join(path.dirname(filePath), filename))
+})
+
+if (process.argv.includes('--pre')) {
+  fs.writeFileSync(
+    path.resolve(__dirname, '../.routes.json'),
+    JSON.stringify(routes)
+  )
+  process.exit(0)
+}
+
+import AppContainer from './app'
+
+// // get extension-less filename
+// const nameArray = path.basename(filePath).split('.')
+// nameArray.pop() // remove original extension
+// const filename = nameArray.join('.')
+// const component = require(path.resolve(buildDir, `${filename}.js`)).default
+
+for (const route of routes) {
+  console.log(`Generating ${route}...`)
+
+  // get extension-less filename
+  const filename = path.basename(route)
   const renderPath = path.resolve(renderDir, `${filename}.html`)
 
-  const content = ReactDOMServer.renderToStaticMarkup(
-    <AppContainer>
-      {require(path.resolve(buildDir, `${filename}.js`)).default}
-    </AppContainer>
-  )
+  const component = require(path.resolve(buildDir, filename + '.js')).default
+  console.log(path.resolve(buildDir, filename))
 
+  const content = ReactDOMServer.renderToStaticMarkup(
+    <AppContainer location={route} component={component} />
+  )
   const helmet = Helmet.renderStatic()
 
   try {
@@ -45,18 +68,20 @@ readdirSyncRecurse(inputDir).forEach((filePath) => {
       renderPath,
       `\
 <!DOCTYPE html>
-<html ${helmet.htmlAttributes.toString()}>
-		<head>
-			${helmet.title.toString()}
-			${helmet.meta.toString()}
-			${helmet.link.toString()}
-		</head>
-		<body ${helmet.bodyAttributes.toString()}>
-			<div id="root">
-				${content}
-			</div>
-			<script src="${mainScriptPath}"></script>
-		</body>
+<html\
+${helmet.htmlAttributes.toString() || ''}>
+<head>
+${helmet.title.toString() || ''}\
+${helmet.meta.toString() || ''}\
+${helmet.link.toString() || ''}
+</head>
+	<body\
+${helmet.bodyAttributes.toString() || ''}>
+		<div id="root">
+			${content}
+		</div>
+		<script src="${mainScriptPath}"></script>
+	</body>
 </html>`
     )
   } catch (err) {
@@ -65,7 +90,7 @@ readdirSyncRecurse(inputDir).forEach((filePath) => {
   }
 
   console.log(`Saved to ${filename}.html\n`)
-})
+}
 
 console.log('Copying static assets...')
 

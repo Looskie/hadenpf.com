@@ -5,15 +5,13 @@ const config: webpack.Configuration = {
   mode: process?.env.NODE_ENV !== 'production' ? 'development' : 'production',
   entry: path.resolve(__dirname, 'src/index.tsx'),
   output: {
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, 'dist/assets'),
   },
 
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.jsx'],
   },
 
-  // ensure no head gets messed up
-  externals: ['react-helmet'],
   module: {
     rules: [
       {

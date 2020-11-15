@@ -2,8 +2,9 @@
   "extends": "../tsconfig.base.json",
   "compilerOptions": {
     "outDir": "build",
-    "jsx": "react"
+    "jsx": "react",
+    "inlineSourceMap": true
   },
-  "include": ["src/*"], // only base level
+  "include": ["src/**/*"], // only base level
   "exclude": ["*.config.ts"]
 }
