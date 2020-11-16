@@ -3,27 +3,26 @@ import * as path from 'path'
 import * as React from 'react'
 import * as ReactDOMServer from 'react-dom/server'
 import * as mkdirp from 'mkdirp'
+import * as typescript from 'typescript'
+
 import { Helmet } from 'react-helmet'
 
 const inputDir = path.resolve(__dirname, '../src/pages')
-const buildDir = path.resolve(__dirname, '../build/pages')
 const renderDir = path.resolve(__dirname, '../dist')
 const assetDir = path.resolve(__dirname, '../public')
 
 // path within web, not on disk
 const mainScriptPath = '/assets/0.js'
 
-if (!fs.existsSync(buildDir)) {
-  console.log('Could not find built files. Please run `yarn build` or `tsc`.')
-  process.exit(1)
-}
-
 const routes: string[] = []
 
-readdirSyncRecurse(inputDir).map((filePath) => {
+readdirSyncRecurse(inputDir).forEach((filePath) => {
   // get extension-less filename
   const nameArray = path.basename(filePath).split('.')
-  nameArray.pop() // remove original extension
+  const ext = nameArray.pop() // remove original extension
+
+  if (!ext || !['tsx', 'jsx', 'ts', 'js'].includes(ext)) return
+
   const filename = nameArray.join('.')
 
   routes.push(path.join(path.dirname(filePath), filename))
@@ -39,12 +38,6 @@ if (process.argv.includes('--pre')) {
 
 import AppContainer from './app'
 
-// // get extension-less filename
-// const nameArray = path.basename(filePath).split('.')
-// nameArray.pop() // remove original extension
-// const filename = nameArray.join('.')
-// const component = require(path.resolve(buildDir, `${filename}.js`)).default
-
 for (const route of routes) {
   console.log(`Generating ${route}...`)
 
@@ -52,11 +45,8 @@ for (const route of routes) {
   const filename = path.basename(route)
   const renderPath = path.resolve(renderDir, `${filename}.html`)
 
-  const component = require(path.resolve(buildDir, filename + '.js')).default
-  console.log(path.resolve(buildDir, filename))
-
   const content = ReactDOMServer.renderToStaticMarkup(
-    <AppContainer location={route} component={component} />
+    <AppContainer location={route} />
   )
   const helmet = Helmet.renderStatic()
 
@@ -69,19 +59,21 @@ for (const route of routes) {
       `\
 <!DOCTYPE html>
 <html\
-${helmet.htmlAttributes.toString() || ''}>
+${helmet.htmlAttributes.toString() || ''}\
+>
 <head>
 ${helmet.title.toString() || ''}\
 ${helmet.meta.toString() || ''}\
 ${helmet.link.toString() || ''}
 </head>
-	<body\
-${helmet.bodyAttributes.toString() || ''}>
-		<div id="root">
-			${content}
-		</div>
-		<script src="${mainScriptPath}"></script>
-	</body>
+<body\
+${helmet.bodyAttributes.toString() || ''}\
+>
+<div id="root">\
+${content}\
+</div>
+<script src="${mainScriptPath}"></script>
+</body>
 </html>`
     )
   } catch (err) {
