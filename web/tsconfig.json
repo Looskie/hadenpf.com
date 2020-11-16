@@ -5,6 +5,6 @@
     "jsx": "react",
     "inlineSourceMap": true
   },
-  "include": ["src/**/*"], // only base level
+  "include": ["src/**/*"],
   "exclude": ["*.config.ts"]
 }
