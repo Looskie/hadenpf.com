@@ -9,6 +9,7 @@ export type GalleryEntry = {
   year: string
   slug: string
 
+  markdown: string
   large?: boolean
 }
 
@@ -33,6 +34,7 @@ export const Gallery: React.FC<GalleryProps> = (props) => {
       {entries.map((data, i) => (
         <Link key={i} href={'/work/[slug]'} as={`/work/${data.slug}`}>
           <a
+            tabIndex={-1}
             className={[styles.GalleryItem, data.large ? styles.Wide : ''].join(
               ' '
             )}
@@ -40,7 +42,14 @@ export const Gallery: React.FC<GalleryProps> = (props) => {
             {/* no alt because the meta is on the overlay div */}
             <img src={data.thumbnail} alt="" />
             <div className={styles.ItemOverlayContainer}>
-              <div className={styles.ItemOverlay}>{data.title}</div>
+              <div className={styles.ItemOverlay}>
+                <label htmlFor={`view-${data.slug}`}>
+                  {data.title} ({data.year})
+                </label>
+                <button id={`view-${data.slug}`} aria-label="View project">
+                  &rarr;
+                </button>
+              </div>
             </div>
           </a>
         </Link>

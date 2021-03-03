@@ -3,6 +3,8 @@ import { Page } from '../../components/Page'
 import { GalleryEntry } from '../../components/Gallery'
 import WorkGalleryPage from './index'
 import { loadProjects } from '../../utils/data'
+import ReactMarkdown from 'react-markdown'
+import styles from '../../styles/pages/Work.module.scss'
 
 type WorkPageProps = {
   data?: GalleryEntry
@@ -19,7 +21,9 @@ const WorkPage: NextPage<WorkPageProps> = (props) => {
       title={data.title}
       displayTitle={`${data.title} (${data.year})`}
     >
-      <h1>WIP!</h1>
+      <ReactMarkdown className={styles.ProjectContent}>
+        {data.markdown}
+      </ReactMarkdown>
     </Page>
   )
 }
