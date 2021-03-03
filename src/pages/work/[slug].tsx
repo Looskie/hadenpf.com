@@ -1,8 +1,8 @@
-import { GetServerSideProps, NextPage } from 'next'
+import { GetServerSideProps, GetStaticPaths, NextPage } from 'next'
 import { Page } from '../../components/Page'
 import { GalleryEntry } from '../../components/Gallery'
-import yaml from 'js-yaml'
 import WorkGalleryPage from './index'
+import { loadProjects } from '../../utils/data'
 
 type WorkPageProps = {
   data?: GalleryEntry
@@ -26,32 +26,27 @@ const WorkPage: NextPage<WorkPageProps> = (props) => {
 
 export default WorkPage
 
-export const getServerSideProps: GetServerSideProps<WorkPageProps> = async ({
+export const getStaticPaths: GetStaticPaths = async () => {
+  const paths = []
+
+  const entries = await loadProjects()
+  for (const entry in entries) paths.push({ params: { slug: entry } })
+
+  return {
+    paths,
+    fallback: false,
+  }
+}
+
+export const getStaticProps: GetServerSideProps<WorkPageProps> = async ({
   params: { slug = '' },
 }) => {
   // a lil type coercion never hurt :)
   slug = slug.toString()
 
   let data: GalleryEntry
-
-  try {
-    const filePath = (await import('path')).resolve(`src/data/projects.yml`)
-
-    if ((await import('fs')).existsSync(filePath)) {
-      const raw = (await import('fs')).readFileSync(filePath, 'utf-8')
-      const entries = yaml.load(raw) as Record<string, GalleryEntry>
-
-      if (entries[slug]) {
-        data = entries[slug]
-      }
-    }
-  } catch (err) {
-    console.log({ err })
-    return {
-      props: {},
-      redirect: '/work',
-    }
-  }
+  const entries = await loadProjects()
+  if (entries[slug]) data = entries[slug]
 
   return {
     props: {
