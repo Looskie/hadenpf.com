@@ -1,0 +1,10 @@
+[build]
+base = "."
+command = "yarn build:netlify"
+publish = "out_publish/"
+functions = "out_functions/"
+
+[dev]
+command = "yarn dev"
+autoLaunch = false
+port = 3030
