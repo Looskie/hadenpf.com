@@ -5,10 +5,12 @@ import { EmailIcon, GitHubIcon, TwitterIcon } from '../icons'
 
 interface SidebarProps {
   plainLine?: boolean
+
+  backPath?: string
 }
 
 export const Sidebar: React.FC<SidebarProps> = (props) => {
-  const { plainLine } = props
+  const { plainLine, backPath } = props
 
   return (
     <aside className={styles.SidebarContainer}>
@@ -19,7 +21,15 @@ export const Sidebar: React.FC<SidebarProps> = (props) => {
           </a>
         </Link>
 
-        <hr className={plainLine ? styles.PlainBorder : ''} />
+        <div className={styles.LineSection}>
+          {!backPath && <hr className={plainLine ? styles.PlainBorder : ''} />}
+
+          {backPath && (
+            <Link href={backPath}>
+              <a className={styles.BackLink}>&larr;</a>
+            </Link>
+          )}
+        </div>
       </div>
       <div className={styles.SocialSection}>
         <a href="https://github.com/hadenpf">

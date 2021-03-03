@@ -30,16 +30,10 @@ export const Page: React.FC<PageProps> = (props) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Sidebar plainLine={!!backPath} />
+      <Sidebar backPath={backPath} />
 
       <main className={styles.MainSection}>
         <header>
-          {backPath && (
-            <Link href={backPath}>
-              <a className={styles.BackLink}>&larr;</a>
-            </Link>
-          )}
-
           <h1>{displayTitle}</h1>
         </header>
 

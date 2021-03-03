@@ -1,7 +1,7 @@
 .GalleryContainer {
   display: grid;
 
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   grid-auto-rows: 1fr;
   grid-gap: 20px;
 
@@ -64,25 +64,34 @@
 }
 
 .GalleryItem {
-  --overlay-height: 48px;
+  --overlay-height: 56px;
+
+  display: flex;
+  flex-flow: column wrap;
+
+  box-shadow: 0 1px 2px rgba(black, .25);
 
   background: darkslateblue;
   color: white;
 
   cursor: pointer;
 
+  &:hover, &:focus {
+    text-decoration: none;
+  }
+
   justify-content: center;
   align-content: center;
-  object-fit: cover;
   overflow: hidden;
 
   &.Wide {
-    grid-column-end: span 2;
+    //grid-column-end: span 2;
   }
 
   img {
-    width: 100%;
+    max-width: 100%;
     height: 100%;
+    object-fit: cover;
     vertical-align: middle;
   }
 
@@ -97,17 +106,35 @@
       flex-flow: row nowrap;
       width: 100%;
 
+      padding: 7px 15px 15px 15px;
+
       justify-content: center;
-      align-items: center;
+      align-items: flex-end;
 
       background: linear-gradient(to bottom,
               rgba(black, 0),
-              rgba(black, .5) 80%,
-              rgba(black, .8) 100%
+              rgba(black, .15) 20%,
+              rgba(black, .45) 60%,
+              rgba(black, .75) 90%
       );
 
-      height: var(--overlay-height);
+      min-height: var(--overlay-height);
 
+      label {
+        font: inherit;
+        flex: 1 0;
+
+        cursor: inherit;
+      }
+
+      button {
+        font: inherit;
+        color: inherit;
+        border: none;
+        background: none;
+
+        cursor: inherit;
+      }
     }
   }
 }
