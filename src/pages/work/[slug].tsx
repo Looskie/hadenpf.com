@@ -14,7 +14,11 @@ const WorkPage: NextPage<WorkPageProps> = (props) => {
   if (!data) return <WorkGalleryPage />
 
   return (
-    <Page backPath="/work" title={data.title}>
+    <Page
+      backPath="/work"
+      title={data.title}
+      displayTitle={`${data.title} (${data.year})`}
+    >
       <h1>WIP!</h1>
     </Page>
   )

@@ -13,7 +13,7 @@
     grid-column: 1 / 1;
   }
 
-  > *:first-child {
+  > :first-child {
     grid-row: 1 / 1;
     grid-column: 1 / 1;
   }
@@ -64,7 +64,50 @@
 }
 
 .GalleryItem {
-  background: red;
+  --overlay-height: 48px;
+
+  background: darkslateblue;
+  color: white;
 
   cursor: pointer;
+
+  justify-content: center;
+  align-content: center;
+  object-fit: cover;
+  overflow: hidden;
+
+  &.Wide {
+    grid-column-end: span 2;
+  }
+
+  img {
+    width: 100%;
+    height: 100%;
+    vertical-align: middle;
+  }
+
+  .ItemOverlayContainer {
+    position: relative;
+    width: 100%;
+    height: 0;
+    bottom: var(--overlay-height);
+
+    .ItemOverlay {
+      display: flex;
+      flex-flow: row nowrap;
+      width: 100%;
+
+      justify-content: center;
+      align-items: center;
+
+      background: linear-gradient(to bottom,
+              rgba(black, 0),
+              rgba(black, .5) 80%,
+              rgba(black, .8) 100%
+      );
+
+      height: var(--overlay-height);
+
+    }
+  }
 }

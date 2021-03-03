@@ -1,10 +1,10 @@
-yasmp:
-  title: Yet Another SMP
-  image: /yasmp.png
-  markdown: |
-    Using Java and Kotlin to make fun stuff happen
 vanillo:
   title: Vanillo
-  image: /vanillo-thumb.png
+  year: 2019
   markdown: |
     Vanillo was a super sick platform
+yasmp:
+  title: Yet Another SMP
+  year: 2021
+  markdown: |
+    Using Java and Kotlin to make fun stuff happen
