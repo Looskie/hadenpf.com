@@ -1,11 +1,8 @@
 [build]
 base = "."
-command = "yarn build:netlify"
+command = "hugo"
 
 [dev]
-command = "yarn dev"
+command = "hugo server -D"
 autoLaunch = false
 port = 3030
-
-[[plugins]]
-package = "@netlify/plugin-nextjs"
