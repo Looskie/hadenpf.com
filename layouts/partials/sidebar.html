@@ -6,9 +6,13 @@
 
 		<div class="line-container">
 			{{ with .Parent }}
-				<a href="{{ .RelPermalink }}" class="back-link" aria-label="Back to Parent Page">
-					{{ partial "inject" "/static/icons/up.svg" }}
-				</a>
+				{{ if gt (strings.Count "/" .RelPermalink) 1 }}
+					<a href="{{ .RelPermalink }}" class="back-link" aria-label="Back to Parent Page">
+						{{ partial "inject" "/static/icons/up.svg" }}
+					</a>
+				{{ else }}
+					<hr class="plain-border" />
+				{{ end }}
 			{{ else }}
 				<hr class="plain-border" />
 			{{ end }}
