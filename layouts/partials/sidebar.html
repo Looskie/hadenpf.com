@@ -1,0 +1,35 @@
+<aside class="sidebar-container">
+	<div class="title-section">
+		<a href="/">
+			<h1>{{ .Site.Title }}</h1>
+		</a>
+
+		<div class="line-container">
+			{{ with .Parent }}
+				<a href="{{ .RelPermalink }}" class="back-link" aria-label="Back to Parent Page">
+					{{ partial "inject" "/static/icons/up.svg" }}
+				</a>
+			{{ else }}
+				<hr class="plain-border" />
+			{{ end }}
+		</div>
+	</div>
+	<div class="social-section">
+		{{ range site.Params.socials }}
+			<a href="{{ .url }}" target="_blank">
+				{{ partial "inject" (printf "/static/icons/%s.svg" (.site | lower)) }}
+			</a>
+		{{ end }}
+	</div>
+	<nav class="nav-section">
+		<ul>
+    	{{ range union (where site.RegularPages "File.Dir" "/") site.Sections }}
+				<li>
+					<a href="{{ .RelPermalink }}">
+						<span>{{ .Title | default .File.TranslationBaseName }}</span>
+					</a>
+				</li>
+			{{ end }}
+		</ul>
+	</nav>
+</aside>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.LanguageCode | default "en" }}">
+<head>
+  <meta charset="utf-8"/>
+  <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1"
+  />
+
+  <link rel="stylesheet" href="{{ (resources.Get "style.scss" | resources.ToCSS (dict "transpiler" "dartsass")).RelPermalink }}" />
+
+  <title>{{ block "title" . }}
+    {{ with .Title }}
+      {{ . }} &mdash; 
+    {{ end }}
+  {{ end }}
+    {{ .Site.Title }}
+</title>
+
+</head>
+<body>
+  <div class="page-container">
+    {{ partial "sidebar" . }}
+
+    <main class="main-section">
+      <header>
+        <h1>{{- .Page.Title | default (printf "%s (%s)" "untitled" (.TranslationBaseName | title)) -}}</h1>
+        {{ block "header" . }}
+        {{ end }}
+      </header>
+
+      {{ block "main" . }}
+        <h3>No content</h3>
+      {{ end }}
+    </main>
+
+  </div>
+
+</body>
+</html>

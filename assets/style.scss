@@ -1,0 +1,41 @@
+@use './content' as content;
+@use './variables' as global;
+@use './layout';
+@use './sidebar';
+@use './cards';
+
+:root {
+  --background-color: #{global.$background};
+  --background-color-rgb: #{global.hexToRGB(global.$background)};
+
+  --foreground-color: #{global.$foreground};
+
+  --accent-color: #0086ff;
+
+  transition: --background-color .5s ease;
+}
+
+body {
+  @include content.text-content;
+
+  margin: 0;
+
+  background: var(--background-color);
+  color: var(--foreground-color);
+
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Roboto, Oxygen,
+  Ubuntu, Cantarell, "Fira Sans", "Droid Sans", Arial, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}

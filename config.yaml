@@ -1,0 +1,12 @@
+baseURL: "https://hadenfletcher.com/"
+languageCode: "en-US"
+title: "Haden Fletcher"
+
+params:
+  socials:
+    - site: GitHub
+      url: https://github.com/hadenpf
+    - site: Twitter
+      url: https://twitter.com/hadenpf
+    - site: Email
+      url: mailto:haden@hadenfletcher.com

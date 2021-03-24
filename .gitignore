@@ -2,15 +2,16 @@
 node_modules/
 
 # build/env
+/out/
+/build/
+/public/
+## I know hugo recommends checking this in, but it hurts to do
+/resources/_gen
+.next/
+.vercel/
 *.local
+*.pem
 
 # spam
 .DS_Store
 *.log
-
-# build/env
-/out/
-/build/
-.next/
-.vercel/
-*.pem
