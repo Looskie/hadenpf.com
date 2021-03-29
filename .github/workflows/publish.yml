@@ -16,7 +16,7 @@ jobs:
           hugo-version: '0.82.0'
           extended: true
       - run: wget -O sass-embedded.tar.gz https://github.com/sass/dart-sass-embedded/releases/download/1.0.0-beta.6/sass_embedded-1.0.0-beta.6-linux-x64.tar.gz
-      - run: tar -xvzf ./sass-embedded.tar.gz -C sass-embedded
+      - run: tar -xvzf ./sass-embedded.tar.gz
       - run: export PATH="./sass-embedded:$PATH"
       - run: hugo
       # will update this later to have a 'confirm publish' thing, idk
