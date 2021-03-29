@@ -30,6 +30,7 @@ jobs:
           retention-days: 7
   
   publish-preview:
+    needs: build
     runs-on: ubuntu-latest
     environment: production
     steps:
