@@ -8,16 +8,22 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
+      - name: Check-out source
+        uses: actions/checkout@v2
+      - name: Set up Node (for Netlify CLI)
+        uses: actions/setup-node@v1
       - name: Set up Hugo
         uses: peaceiris/actions-hugo@v2
         with:
           hugo-version: '0.82.0'
           extended: true
-      - run: wget -O sass_embedded.tar.gz https://github.com/sass/dart-sass-embedded/releases/download/1.0.0-beta.6/sass_embedded-1.0.0-beta.6-linux-x64.tar.gz
-      - run: tar -xvzf ./sass_embedded.tar.gz
-      - run: echo "./sass_embedded" >> $GITHUB_PATH
-      - run: hugo
+      - name: Set up dart-sass-embedded
+        run: |
+          wget -O sass_embedded.tar.gz https://github.com/sass/dart-sass-embedded/releases/download/1.0.0-beta.6/sass_embedded-1.0.0-beta.6-linux-x64.tar.gz
+          tar -xvzf ./sass_embedded.tar.gz
+          echo "./sass_embedded" >> $GITHUB_PATH
+      - name: Build site
+        run: hugo
       # will update this later to have a 'confirm publish' thing, idk
-      - run: npx netlify deploy
+      - name: Deploy to Netlify
+        run: npx netlify deploy
