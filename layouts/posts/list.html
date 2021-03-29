@@ -3,7 +3,7 @@
 
   {{ with .Pages }}
     {{ range .GroupByDate "2006" }}
-      <h2 aria-label="Published in {{ .Key }}">{{ .Key }}</h2>
+      <h2 style="font-weight:400; font-size: 18pt;" aria-label="Published in {{ .Key }}">{{ .Key }}</h2>
       <ul>
         {{ range .Pages }}
           <li>
@@ -13,6 +13,6 @@
       </ul>
     {{ end }}
 	{{ else }}
-    No posts to show right now. Check back in a bit?
+    <p>No posts to show right now. Check back in a bit?</p>
   {{ end }}
 {{ end }}

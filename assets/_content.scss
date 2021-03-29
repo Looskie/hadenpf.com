@@ -9,7 +9,7 @@
 }
 
 @mixin text-content {
-  font-size: 16px;
+  font-size: 12pt;
   line-height: 1.375;
 
   p {
@@ -28,9 +28,9 @@
     margin: 0 0 8px 0;
   }
 
-  h1 {
-    @include font-serif;
-  }
+  // h1 {
+  //   @include font-serif;
+  // }
 
   img {
     width: 100%;
@@ -50,7 +50,7 @@
         content: '(' attr(href) ')';
         text-decoration: none;
         font-weight: 400;
-        padding-left: 8px;
+        padding-left: 4pt;
       }
     }
 
@@ -59,7 +59,7 @@
       text-decoration: underline;
     }
 
-    span {
+    span:only-child {
       color: var(--foreground-color);
     }
   }
@@ -71,7 +71,6 @@
     margin: 0;
 
     li {
-      font-size: 18px;
       line-height: 1.25;
     }
   }

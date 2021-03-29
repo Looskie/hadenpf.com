@@ -10,6 +10,11 @@
   padding: 0 40px;
   margin: 0 auto;
 
+  @media print {
+    max-width: none;
+    padding: 0;
+  }
+
   align-items: stretch;
 }
 
@@ -23,10 +28,17 @@ main {
   header:first-child {
     display: flex;
 
-    margin: 72px 0 52px 0;
+    margin: 72px 0 24px 0;
+    padding-bottom: 24px;
+    border-bottom: 2px solid #e9e9e9;
+
     flex-flow: column nowrap;
     position: sticky;
     top: 0;
+
+    @media print {
+      margin-top: 36px;
+    }
 
     // background: linear-gradient(180deg,
     //         rgba(var(--background-color-rgb), 1) 20px,
@@ -40,21 +52,20 @@ main {
       margin: 0;
 
       font-weight: 600;
-      font-size: 36px;
-      line-height: 38px;
+      font-size: 24pt;
+      line-height: 24pt;
     }
 
     small {
-      margin-top: 7px;
+      margin-top: 10px;
 
-      font-weight: 700;
-      font-size: 12px;
-      line-height: 14px;
+      font-weight: 400;
+      font-size: 10pt;
+      line-height: 12pt;
     }
   }
 
   article {
     text-align: justify;
-    max-width: 768px;
   }
 }
