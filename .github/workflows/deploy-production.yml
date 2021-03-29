@@ -11,6 +11,11 @@ jobs:
     steps:
       - name: Check-out source
         uses: actions/checkout@v2
+      - name: Set up Hugo
+        uses: peaceiris/actions-hugo@v2
+        with:
+          hugo-version: '0.82.0'
+          extended: true
       - name: Set up Node
         uses: actions/setup-node@v1
       - name: Build site
