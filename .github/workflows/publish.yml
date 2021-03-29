@@ -32,5 +32,7 @@ jobs:
         uses: actions/setup-node@v1
       # will update this later to have a 'confirm publish' thing, idk
       - name: Deploy to Netlify
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
         run: npx netlify deploy
-
