@@ -19,7 +19,7 @@ jobs:
       - name: Set up Node
         uses: actions/setup-node@v1
       - name: Build site
-        uses: ./.github/actions/build.yml
+        uses: ./.github/actions/build
       - name: Deploy to Netlify as production
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
