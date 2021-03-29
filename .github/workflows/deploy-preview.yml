@@ -1,0 +1,20 @@
+name: Deploy Preview
+
+on: [ push ]
+
+jobs:  
+  publish-preview:
+    runs-on: ubuntu-latest
+    environment: preview
+    steps:
+      - name: Check-out source
+        uses: actions/checkout@v2
+      - name: Set up Node
+        uses: actions/setup-node@v1
+      - name: Build site
+        uses: ./.github/actions/build.yml
+      - name: Deploy to Netlify
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+        run: npx netlify deploy
