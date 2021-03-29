@@ -6,13 +6,10 @@ on:
 
 jobs:
   build:
-    environment: Deploy (Production)
     runs-on: ubuntu-latest
     steps:
       - name: Check-out source
         uses: actions/checkout@v2
-      - name: Set up Node (for Netlify CLI)
-        uses: actions/setup-node@v1
       - name: Set up Hugo
         uses: peaceiris/actions-hugo@v2
         with:
@@ -25,6 +22,15 @@ jobs:
           echo "./sass_embedded" >> $GITHUB_PATH
       - name: Build site
         run: hugo
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment: Deploy (Production)
+    steps:
+      - name: Set up Node
+        uses: actions/setup-node@v1
       # will update this later to have a 'confirm publish' thing, idk
       - name: Deploy to Netlify
         run: npx netlify deploy
+
