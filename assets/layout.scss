@@ -1,20 +1,29 @@
+@use './content' as content;
+
 .page-container {
   display: flex;
+  flex-flow: column nowrap;
   flex-grow: 1;
   align-self: stretch;
+
+  max-width: 896px;
+  padding: 0 40px;
+  margin: 0 auto;
+
+  align-items: stretch;
 }
 
-.main-section {
+main {
+  @include content.text-content;
+
   display: flex;
   flex-flow: column nowrap;
   flex: 1 0;
 
-  padding: 0 20px 20px 0;
-
   header:first-child {
     display: flex;
 
-    padding: 20px 0;
+    margin: 72px 0 52px 0;
     flex-flow: column nowrap;
     position: sticky;
     top: 0;
@@ -27,12 +36,20 @@
     background: rgba(var(--background-color-rgb), .8);
     backdrop-filter: blur(15px);
 
-    > h1 {
+    h1 {
       margin: 0;
 
-      font-weight: 500;
-      font-size: 24px;
-      line-height: 29px;
+      font-weight: 600;
+      font-size: 36px;
+      line-height: 38px;
+    }
+
+    small {
+      margin-top: 7px;
+
+      font-weight: 700;
+      font-size: 12px;
+      line-height: 14px;
     }
   }
 

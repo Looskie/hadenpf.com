@@ -4,9 +4,9 @@ title: "Haden Fletcher"
 
 params:
   socials:
-    - site: GitHub
-      url: https://github.com/hadenpf
-    - site: Twitter
-      url: https://twitter.com/hadenpf
     - site: Email
       url: mailto:haden@hadenfletcher.com
+    - site: Twitter
+      url: https://twitter.com/hadenpf
+    - site: GitHub
+      url: https://github.com/hadenpf

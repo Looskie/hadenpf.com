@@ -11,6 +11,8 @@ It's also the first piece of web tooling I've ever used that's *noticeably incre
 React version of this site in favor of Hugo because of how much more perfect I realized it was as I messed with it.
 Sadly, I can't claim that I "rewrote the entire site" because it wasn't _quite_ finished being written yet. :(
 
+## In the Real World
+
 At work, I've been using Hugo on some massively contentful client sites (with hundreds-on-thousands of pages, which IS
 enough to make Hugo take some time!) so its speed wasn't as apparent until I started working on smaller projects (like this site!)
 that generated in *under half a second*, and honestly I'm not sure if it even crossed the [magic tenth-of-a-second mark][tenth-of-a-second].
