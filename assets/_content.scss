@@ -18,6 +18,18 @@
     margin: 0 0 12px 0;
   }
 
+  blockquote {
+    margin: 20pt 0;
+    padding: 4pt 0;
+    color: darkslategray;
+    padding-left: 14pt;
+    border-left: 4px solid #dedede;
+
+    p {
+      margin: 0;
+    }
+  }
+
   h1,
   h2,
   h3,
