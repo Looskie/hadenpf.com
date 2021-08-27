@@ -1,9 +1,0 @@
-[build]
-base = "."
-publish = "public/"
-command = "hugo"
-
-[dev]
-command = "hugo server -D"
-autoLaunch = false
-port = 3030

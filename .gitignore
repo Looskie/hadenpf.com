@@ -1,18 +1,18 @@
-# deps
+# build output
+dist
+
+# dependencies
 node_modules/
+.snowpack/
 
-# build/env
-/out/
-/build/
-/public/
-## I know hugo recommends checking this in, but it hurts to do
-/resources/_gen
-.netlify/
-.next/
-.vercel/
-*.local
-*.pem
+# logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 
-# spam
+# environment variables
+.env
+.env.production
+
+# macOS-specific files
 .DS_Store
-*.log

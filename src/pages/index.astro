@@ -1,0 +1,20 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'
+import ArticleHeader from '../components/Article/ArticleHeader.astro'
+
+import Markdown from 'astro/components/Markdown.astro'
+
+const title = 'Haden Fletcher';
+---
+
+<BaseLayout title={title}>
+	<article>
+		<ArticleHeader title="Hello! 👋" />
+
+		<Markdown>
+			I'm still working on content for this page. 🚧
+
+			Please feel free to check out the [Playground](/playground) while I work on the rest of the site...
+		</Markdown>
+	</article>
+</BaseLayout>

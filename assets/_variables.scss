@@ -1,7 +1,0 @@
-$background: #fdfdff;
-$foreground: #001;
-$accent: #0086ff;
-
-@function hexToRGB($hex) {
-  @return red($hex), green($hex), blue($hex);
-}
