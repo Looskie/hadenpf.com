@@ -1,0 +1,8 @@
+---
+// we have to do this because Astro is so good (fr!) that it
+// tree-shakes a LITTLE BIT TOO HARD and this is the only
+// way I know of atm to convince it to keep some separate files
+import NiceTextInput from '../../components/playground/nice-text-input/index.tsx'
+---
+
+<NiceTextInput client:visible />
