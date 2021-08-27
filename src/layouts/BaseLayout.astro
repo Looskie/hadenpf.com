@@ -1,0 +1,61 @@
+---
+import Header from '../components/Nav/Header.astro'
+import WidthContainer from '../components/WidthContainer.astro'
+
+import '../assets/base.css'
+
+const { title } = Astro.props
+---
+
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width">
+
+		<link rel="preconnect" href="https://fonts.gstatic.com" />
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,700&display=swap" />
+
+		<title>{title}</title>
+
+		<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+	</head>
+	<body>
+		<a class="accessible-button" href="#main-content">
+			Skip to main content
+		</a>
+		<a class="accessible-button" href="#main-navigation">
+			Skip to navigation
+		</a>
+
+		<WidthContainer>
+			<Header />
+		</WidthContainer>
+
+		<main id="main-content">
+			<WidthContainer>
+				<slot />
+			</WidthContainer>
+		</main>
+	</body>
+</html>
+
+<style lang="scss">
+	.accessible-button {
+		opacity: 0;
+		pointer-events: none;
+
+		position: absolute;
+		top: 5px;
+		left: 5px;
+		background: linear-gradient(to bottom, #eee, #ccc);
+		font-family: sans-serif;
+
+		padding: 4pt 8pt;
+		border-radius: 4px;
+
+		&:focus {
+			pointer-events: all;
+			opacity: 1.0;
+		}
+	}
+</style>
