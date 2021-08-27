@@ -37,7 +37,7 @@ const subtitle = 'Just some UI components I\'ve made.'
 									</p>
 								)}
 							</div>
-							<div aria-label={technologies} title={technologies}>
+							<div class="tech-badges" aria-label={technologies} title={technologies}>
 								{tech.map((tech: string) => (
 									<img class="tech-badge" src={`/assets/icons/${tech.toLowerCase()}.svg`} />
 								))}
@@ -72,6 +72,10 @@ const subtitle = 'Just some UI components I\'ve made.'
 
 	.card-text {
 		flex: 1 0;
+	}
+
+	.tech-badges {
+		margin-left: 12pt;
 	}
 
 	.tech-badge {
