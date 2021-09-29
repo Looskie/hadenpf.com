@@ -22,13 +22,24 @@ const content = Astro.fetchContent('../pages/projects/*/index.md').map((page) =>
 
 <BaseLayout title={title}>
 	<header>
-		<Headline title={title} subtitle={subtitle} highlight punctuate="title" />
+		<Headline
+			title={title}
+			subtitle={subtitle}
+			punctuate="title"
+			highlight
+		/>
 	</header>
 
 	<div class="projectList">
 		{content.map(async (page, i) => {
 			return (
-				<DisplayCard featured={i === 0} title={page.title} subtitle={page.subtitle} link={page.url} image={`/assets/projects/${page.slug}/card.png`} />
+				<DisplayCard
+					featured={i === 0}
+					title={page.title}
+					subtitle={page.subtitle}
+					link={page.url}
+					image={`/assets/projects/${page.slug}/card.png`}
+				/>
 			)
 		})}
 	</div>
