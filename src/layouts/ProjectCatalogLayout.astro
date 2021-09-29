@@ -26,9 +26,9 @@ const content = Astro.fetchContent('../pages/projects/*/index.md').map((page) =>
 	</header>
 
 	<div class="projectList">
-		{content.map(async (page) => {
+		{content.map(async (page, i) => {
 			return (
-				<DisplayCard key={page.url} title={page.title} subtitle={page.subtitle} image={`/assets/projects/${page.slug}/card.png`} />
+				<DisplayCard featured={i === 0} title={page.title} subtitle={page.subtitle} link={page.url} image={`/assets/projects/${page.slug}/card.png`} />
 			)
 		})}
 	</div>
