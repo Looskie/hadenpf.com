@@ -9,5 +9,6 @@ module.exports = {
 		$organisms: './src/components/organisms',
 		$utils: './src/components/utils',
 		$layouts: './src/layouts',
+		$public: './src/public',
 	},
 }
