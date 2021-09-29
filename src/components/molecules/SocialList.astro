@@ -1,0 +1,68 @@
+---
+export interface Props {
+	items?: Array<{
+		icon: string
+		url: string
+		alt: string
+	}>
+}
+
+import Icon from '$atoms/Icon.astro'
+
+const DEFAULT_SOCIAL_LIST: Props['items'] = [
+	{
+		icon: 'github',
+		alt: 'Follow me on GitHub',
+		url: 'https://github.com/hadenpf',
+	},
+	{
+		icon: 'twitter',
+		alt: 'Follow me on Twitter',
+		url: 'https://twitter.com/hadenpf',
+	},
+	{
+		icon: 'email',
+		alt: 'Send me an email',
+		url: 'mailto:heyo@hadenpf.com'
+	}
+]
+
+const { items = DEFAULT_SOCIAL_LIST } = Astro.props
+---
+
+<ul class="socialList">
+	{items.map((item) => (
+		<li>
+			<a href={item.url} target="_self">
+				<Icon name={item.icon} />
+			</a>
+		</li>
+	))}
+</ul>
+
+<style lang="scss">
+	.socialList {
+		flex: 0 0;
+
+		display: flex;
+		flex-flow: row nowrap;
+
+		list-style: none;
+		padding: 0;
+		margin: 0;
+
+		li {
+			font-size: 12px;
+			font-weight: 500;
+			line-height: 16px;
+
+			&:not(:last-child) {
+				margin-right: 24px;
+			}
+
+			a {
+				text-decoration-color: var(--accent);
+			}
+		}
+	}
+</style>
