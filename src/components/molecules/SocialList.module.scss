@@ -1,0 +1,24 @@
+.SocialList {
+	flex: 0 0;
+
+	display: flex;
+	flex-flow: row nowrap;
+
+	list-style: none;
+	padding: 0;
+	margin: 0;
+
+	li {
+		font-size: 12px;
+		font-weight: 500;
+		line-height: 16px;
+
+		&:not(:last-child) {
+			margin-right: 24px;
+		}
+
+		a {
+			text-decoration-color: var(--accent);
+		}
+	}
+}

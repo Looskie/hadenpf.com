@@ -1,0 +1,30 @@
+---
+import * as path from 'node:path'
+import BaseLayout from '$layouts/BaseLayout.astro'
+import Headline from '$atoms/Headline'
+import DisplayCard from '$organisms/DisplayCard'
+
+const { title, subtitle } = Object.assign({}, Astro.props, Astro.props.content)
+
+const content = Astro.fetchContent('../pages/projects/*/index.md')
+const images = content.map(async (page) => {
+	try {
+		const a = await import(`../pages/projects/${'heyo'}/card.png`)
+		console.log(a)
+	} catch(err){
+		console.log(err.stack)
+	}	
+})
+---
+
+<BaseLayout title={title}>
+	<header>
+		<Headline title={title} subtitle={subtitle} highlight punctuate="title" />
+	</header>
+
+	{content.map(async (page) => {
+		return (
+			<DisplayCard key={page.url} title={page.title} subtitle={page.subtitle} image={'/avi.png'} />
+		)
+	})}
+</BaseLayout>

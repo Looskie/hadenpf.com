@@ -1,0 +1,16 @@
+---
+import BaseLayout from '$layouts/BaseLayout.astro'
+import Headline from '$atoms/Headline.astro'
+
+const { title = Astro.props.content?.title, subtitle } = Astro.props
+---
+
+<BaseLayout title={title}>
+	<header>
+		<Headline title={title} subtitle={subtitle} />
+	</header>
+
+	<article>
+		<slot />
+	</article>
+</BaseLayout>

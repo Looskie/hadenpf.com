@@ -1,0 +1,41 @@
+.Headline {
+	display: inline-flex;
+	flex-flow: row wrap;
+
+	margin: 0 0 8px 0;
+
+	font-weight: 700;
+	font-size: 28px;
+	line-height: 1.15;
+
+	color: var(--primary-a);
+
+	gap: 0.2em;
+
+	&.small {
+		font-size: 18px;
+		line-height: 1.1;
+	}
+
+	&.noSpacing {
+		margin: 0;
+	}
+
+	&.highlight {
+		.title {
+			color: var(--accent);
+		}
+	}
+
+	> span {
+		&.subtitle {
+			font-weight: 400;
+			color: var(--secondary-b);
+		}
+	}
+
+	@media screen and (max-width: 768px) {
+		flex-direction: column;
+		gap: 0;
+	}
+}

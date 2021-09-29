@@ -1,0 +1,68 @@
+---
+export interface Props extends SVGElement {
+	thickness?: null | 'thick' | 'thin';
+	height?: number;
+	alt?: string;
+	primary?: boolean;
+	id: string;
+}
+
+const {
+	height = 33,
+	primary = false,
+	thickness = primary ? null : 'thin',
+	alt = "Heyo, written in cursive",
+	id,
+	...attrs
+} = Astro.props as Props
+
+const
+	width = height * 1.8, // (calculated from input value: WxH = 56x31 --> 56/31 ⋍ 1.80)
+	strokeWidth =
+		thickness ?
+			(thickness === 'thick' && 3) ||
+			(thickness === 'thin' && 2)
+			: 2.5
+
+const LABELS = {
+	title: `${id}.title`
+}
+---
+
+<svg
+	id={id}
+	data-ignore-this=""
+	class={primary ? 'primary' : 'secondary'}
+	aria-labelledby={LABELS.title}
+	role="img"
+
+	width={width}
+	height={height}
+	viewBox="0 0 56.6 31"
+	xmlns="http://www.w3.org/2000/svg"
+	{...attrs}
+>
+	<title
+		id={LABELS.title}
+		data-ignore-this=""
+	>
+		{alt}
+	</title>
+
+	<path d="M2 18.0955C6.13342 18.0955 19.707 2.09219 13.4609 2.00034C7.21488 1.90849 7.85786 20.463 7.85786 20.463C7.85786 20.463 8.13342 11.7368 13.1854 11.7368C18.2373 11.7368 12.3587 20.2792 16.7677 20.5548C21.1767 20.8304 27.5146 12.1961 22.9219 12.0124C18.3292 11.8287 18.421 20.0955 24.5753 20.3711C30.7295 20.6467 31.9043 12.0124 31.9043 12.0124C31.4227 17.0157 28.971 19.7418 32.4199 20.1092C36.8999 20.4766 38.6069 12.0124 38.6069 12.0124C38.6069 12.0124 37.0602 30.1725 31.3887 29.9988C28.8107 29.9198 27.7795 26.8119 30.8731 23.2028C33.9666 19.5936 47.4053 11.8287 47.4053 11.8287M47.4053 11.8287C50.069 12.0124 51.1713 14.0332 51.0794 13.9413C50.9876 13.8495 51.9061 20.1874 47.0379 20.1874C42.1696 20.1874 42.7207 11.645 47.4053 11.8287ZM47.4053 11.8287C51.6306 12.1961 51.0794 15.8703 51.1713 14.8599C51.1713 14.9517 54.2025 13.9413 54.6617 11.9206" stroke-width={strokeWidth} stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+
+<style lang="scss">
+	svg {
+		fill: none;
+		vertical-align: baseline;
+
+		&.primary {
+			stroke: var(--accent);
+		}
+
+		&.secondary {
+			stroke: var(--accent-dark);
+		}
+	}
+</style>

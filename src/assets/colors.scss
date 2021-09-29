@@ -1,6 +1,30 @@
-$background: #fdfdff;
-$foreground: #001;
-$accent: #0086ff;
+$background: #ffffff;
+
+$primary-a: #000000;
+
+$primary-inverted-a: #ffffff;
+
+$secondary-a: #9d9d9d;
+$secondary-b: #7a7a7a;
+
+$accent: #650bda;
+$accent-light: #a866ff;
+$accent-dark: #4800a6;
+
+:root {
+	--background: #{$background};
+	--background-rgb: #{hexToRGB($background)};
+
+	--primary-a: #{$primary-a};
+
+	--secondary-a: #{$secondary-a};
+	--secondary-b: #{$secondary-b};
+
+	--accent: #{$accent};
+	--accent-light: #{$accent-light};
+	--accent-dark: #{$accent-dark};
+	--accent-rgb: #{hexToRGB($accent)};
+}
 
 @function hexToRGB($hex) {
 	@return red($hex), green($hex), blue($hex);
