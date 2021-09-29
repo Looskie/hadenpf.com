@@ -6,14 +6,18 @@ import DisplayCard from '$organisms/DisplayCard'
 
 const { title, subtitle } = Object.assign({}, Astro.props, Astro.props.content)
 
-const content = Astro.fetchContent('../pages/projects/*/index.md')
-const images = content.map(async (page) => {
-	try {
-		// const a = await import(`../pages/projects/${'heyo'}/card.png`)
-		// console.log(a)
-	} catch(err){
-		console.log(err.stack)
-	}	
+const content = Astro.fetchContent('../pages/projects/*/index.md').map((page) => {
+	const pathSegments: string[] = page.url.split('/')
+
+	if(pathSegments[pathSegments.length - 1] === 'index')
+		pathSegments.pop() // remove last 'index' path segment
+
+	const slug = pathSegments[pathSegments.length - 1]
+
+	return {
+		...page,
+		slug
+	}
 })
 ---
 
@@ -22,9 +26,24 @@ const images = content.map(async (page) => {
 		<Headline title={title} subtitle={subtitle} highlight punctuate="title" />
 	</header>
 
-	{content.map(async (page) => {
-		return (
-			<DisplayCard key={page.url} title={page.title} subtitle={page.subtitle} image={'/avi.png'} />
-		)
-	})}
+	<div class="projectList">
+		{content.map(async (page) => {
+			return (
+				<DisplayCard key={page.url} title={page.title} subtitle={page.subtitle} image={`/assets/projects/${page.slug}/card.png`} />
+			)
+		})}
+	</div>
 </BaseLayout>
+
+<style lang="scss">
+	.projectList {
+		display: grid;
+		grid-template-columns: 1fr;
+
+		@media screen and (min-width: 769px) {
+			grid-template-columns: 1fr 1fr;
+
+			gap: calc(18px * 2);
+		}
+	}
+</style>
