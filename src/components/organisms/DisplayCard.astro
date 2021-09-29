@@ -14,9 +14,7 @@ const { title, subtitle, featured = false, image = '/avi.png' } = Astro.props
 ---
 
 <div
-	style={{
-		backgroundImage: `url('${image}')`,
-	}}
+	style={`background-image: url('${image}');`}
 	class="displayCard"
 >
 	<Headline small noSpacing title={title} subtitle={subtitle} />

@@ -1,8 +1,7 @@
 ---
-import * as path from 'node:path'
 import BaseLayout from '$layouts/BaseLayout.astro'
 import Headline from '$atoms/Headline'
-import DisplayCard from '$organisms/DisplayCard'
+import DisplayCard from '$organisms/DisplayCard.astro'
 
 const { title, subtitle } = Object.assign({}, Astro.props, Astro.props.content)
 
