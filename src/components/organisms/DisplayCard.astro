@@ -1,3 +1,29 @@
+---
+export interface Props {
+	title: string
+	subtitle: string
+	featured?: boolean
+
+	image?: string
+}
+
+import Headline from '$atoms/Headline'
+import Icon from '$atoms/Icon.astro'
+
+const { title, subtitle, featured = false, image = '/avi.png' } = Astro.props
+---
+
+<div
+	style={{
+		backgroundImage: `url('${image}')`,
+	}}
+	class="displayCard"
+>
+	<Headline small noSpacing title={title} subtitle={subtitle} />
+	<Icon name="chevron-right" />
+</div>
+
+<style lang="scss">
 .displayCard {
 	--primary-a: #fff;
 	--secondary-b: rgba(255, 255, 255, 0.7);
@@ -24,3 +50,4 @@
 
 	margin-top: 18px;
 }
+</style>
