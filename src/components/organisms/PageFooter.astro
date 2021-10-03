@@ -1,16 +1,32 @@
 ---
+export interface Props {
+	publishDate?: Date;
+	footnotes?: { [key: string]: string };
+}
+
 import WidthContainer from '$utils/WidthContainer.astro';
 
 // get the current year (this runs at build time and passes into component to be statically generated)
 const currentYear = new Date().getFullYear()
+
+const {
+	publishDate,
+	footnotes
+}: Props = Astro.props
 ---
 
 <footer class="pageFooter">
 	<div class="pageInset">
 		<WidthContainer>
-			<!-- <hr class="separator" aria-hidden="true" /> -->
+			{publishDate && (
+				<p>
+					This page was published {publishDate.toLocaleDateString()}
+				</p>
+			)}
 			
-			&copy; {currentYear.toString()} Haden Fletcher. All rights reserved.
+			<p>
+				&copy; {currentYear.toString()} Haden Fletcher. All rights reserved.
+			</p>
 		</WidthContainer>
 	</div>
 </footer>
@@ -29,6 +45,10 @@ const currentYear = new Date().getFullYear()
 	color: var(--secondary-b);
 	font-weight: 500;
 	font-size: 14px;
+
+	p:last-child {
+		margin-bottom: 0;
+	}
 }
 
 .separator {

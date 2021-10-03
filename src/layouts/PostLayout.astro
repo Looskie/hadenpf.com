@@ -1,0 +1,58 @@
+---
+export interface Props {
+	title: string;
+	subtitle?: string;
+	banter?: string;
+
+	published: boolean | Date;
+}
+
+import Markdown from 'astro/components'
+import BaseLayout from '$layouts/BaseLayout.astro'
+import Headline from '$atoms/Headline'
+
+const {
+	title,
+	subtitle,
+	banter,
+	...props
+}: Props = Object.assign({}, Astro.props, Astro.props.content)
+---
+
+<BaseLayout title={title} {...props}>
+	<article>
+		<header>
+			<Headline
+				title={title + (subtitle ? '.' : '')}
+				subtitle={subtitle}
+				highlight
+			/>
+
+			{banter && (
+				<div class="banter">
+					<p>
+						<em>{banter}</em>
+					</p>
+				</div>
+			)}
+		</header>
+
+		<section class="main">
+			<slot />
+		</section>
+	</article>
+</BaseLayout>
+
+<style lang="scss">
+	.banter {
+		padding-top: .5em;
+		padding-bottom: .5rem;
+		border-bottom: 1px solid var(--secondary-l);
+
+		color: var(--secondary-b);
+	}
+
+	.main {
+		margin-top: 1.5rem;
+	}
+</style>

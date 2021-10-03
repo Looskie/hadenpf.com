@@ -5,8 +5,17 @@ import WidthContainer from '$utils/WidthContainer.astro'
 
 import '../assets/base.css'
 
-const { title } = Astro.props
-const { title: pageTitle } = Astro.props.content || {}
+const {
+	title = 'Haden Fletcher',
+	image,
+	imageDescription,
+	...props
+} = Object.assign({}, Astro.props, Astro.props.content)
+
+let { published } = props
+
+if(typeof published === 'string')
+	published = new Date(published)
 ---
 
 <html lang="en">
@@ -17,7 +26,7 @@ const { title: pageTitle } = Astro.props.content || {}
 		<link rel="preconnect" href="https://fonts.gstatic.com" />
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,400;0,600;0,700;1,400;1,700&display=swap" />
 
-		<title>{pageTitle || title}</title>
+		<title>{title}</title>
 
 		<link rel="icon" type="image/x-icon" href="/favicon.ico" />
 	</head>
@@ -29,22 +38,34 @@ const { title: pageTitle } = Astro.props.content || {}
 			Skip to navigation
 		</a>
 
-		<div
-			class="pageInset"
-			style="flex: 1 0"
-		>
+		<div class="pageInset">
 			<WidthContainer>
 				<Navigation id="main-navigation" />
 			</WidthContainer>
-
-			<WidthContainer>
-				<main id="main-content">
-					<slot />
-				</main>
-			</WidthContainer>
 		</div>
 
-		<PageFooter />
+		<main
+			id="main-content"
+			style="flex: 1 0"
+		>
+			{image && (imageDescription === undefined ? (
+				<p>No image description provided!</p>
+			) : (
+				<figure class="banner">
+					<img src={image} alt={imageDescription} />
+				</figure>
+			))}
+
+			<div
+				class="pageInset"
+			>
+				<WidthContainer>
+					<slot />
+				</WidthContainer>
+			</div>
+		</main>
+
+		<PageFooter publishDate={published} />
 	</body>
 </html>
 
@@ -68,8 +89,33 @@ const { title: pageTitle } = Astro.props.content || {}
 		}
 	}
 
-	main {
-		padding-left: var(--content-inset);
-		padding-right: var(--content-inset);
+	.banner {
+		display: flex;
+		flex-flow: row nowrap;
+		justify-content: center;
+
+		height: 346px;
+		width: 100%;
+
+		margin: 0;
+		margin-top: -32px;
+		margin-bottom: 28px;
+
+		img {
+			object-fit: cover;
+			object-position: center;
+
+			width: 100%;
+			height: 100%;
+
+			max-width: 812px;
+
+			box-shadow: 0 1px 12px var(--secondary-ul);
+		}
 	}
+
+	// main {
+	// 	padding-left: var(--content-inset);
+	// 	padding-right: var(--content-inset);
+	// }
 </style>
