@@ -56,9 +56,16 @@ async function getIconMarkup(iconName: string): Promise<string> {
 		if(!customIconPath.endsWith('.svg'))
 			throw new EvalError(`Icon ${iconName} is not an SVG file. Can't render it!`)
 
-		return (
-			await fs.readFile(customIconPath)
-		).toString()
+		// inner icon content (no outer svg tag)
+		const iconInner = (await fs.readFile(customIconPath))
+			.toString()
+			// remove all <svg /> tags -- just leave the paths and all intact
+			.replace(/\<\/?svg[^>]*\>/g, '')
+
+		return `\
+<svg width="${width}" height="${height}" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+	${iconInner}
+</svg>`
 	} else {
 		if (iconName in feather.icons) {
 			const icon = feather.icons[iconName]
