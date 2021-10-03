@@ -16,6 +16,8 @@ export interface Props {
 		featured?: boolean
 
 		published?: boolean
+		image?: string
+		lightImage?: boolean
 	}[];
 }
 
@@ -69,7 +71,8 @@ const content = pages.filter((page) => process.env.npm_lifecycle_event === 'dev'
 					title={page.title}
 					subtitle={page.subtitle}
 					link={page.url}
-					image={`/assets/${sectionPath}/${page.slug}/card.png`}
+					image={page.image || `/assets/${sectionPath}/${page.slug}/card.png`}
+					lightImage={page.lightImage}
 				/>
 			)
 		})}

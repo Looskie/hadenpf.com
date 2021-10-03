@@ -6,6 +6,7 @@ featured: true
 published: 2021-10-03T07:07:00-05:00
 
 image: /assets/words/object-permanence/card.png
+lightImage: true
 imageDescription: ''
 
 banter: "'Object Permanence' is a metaphor for having a long-term place to store ideas and thoughts. I know it's a silly title. I just don't care."
