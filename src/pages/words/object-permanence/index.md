@@ -16,3 +16,6 @@ I've been aching for a place to write longer-form posts! I've had some content i
 I'll probably spend the next few weeks writing up some [projects] to showcase, and then return to write some [words] when I have some — in fact, I'll probably do both of those things fairly asynchronously.
 
 I'm happy to finally have a nice place to write stuff. Some self-engineered object permanence.
+
+[projects]: /projects
+[words]: /words
