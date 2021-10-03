@@ -34,7 +34,7 @@ const { items = DEFAULT_SOCIAL_LIST } = Astro.props
 	{items.map((item) => (
 		<li>
 			<a href={item.url} target="_self">
-				<Icon name={item.icon} />
+				<Icon name={item.icon} size={22} />
 			</a>
 		</li>
 	))}
@@ -57,7 +57,7 @@ const { items = DEFAULT_SOCIAL_LIST } = Astro.props
 			line-height: 16px;
 
 			&:not(:last-child) {
-				margin-right: 24px;
+				margin-right: 18px;
 			}
 
 			a {
