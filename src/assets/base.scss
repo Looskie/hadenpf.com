@@ -8,10 +8,15 @@
 
 	--page-inset: 18px;
 	--content-inset: 12px;
+	min-height: 100vh;
 }
 
 body {
-	margin: var(--page-inset);
+	margin: 0;
+	display: flex;
+	flex-flow: column nowrap;
+
+	min-height: inherit;
 
 	background: var(--background);
 	color: var(--primary-a);
@@ -20,6 +25,11 @@ body {
 	// explicitly call this out so we don't forget to respect user preferences :)
 	font-size: 1rem;
 	line-height: 125%;
+}
+
+.pageInset {
+	padding-left: var(--page-inset);
+	padding-right: var(--page-inset);
 }
 
 article {
