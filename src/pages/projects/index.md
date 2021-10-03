@@ -2,5 +2,7 @@
 layout: $layouts/ProjectCatalogLayout.astro
 
 title: Projects
-subtitle: Stuff I've made.
+subtitle: A showcase for things I've done.
 ---
+
+I'll add some content here soon. The site itself will likely be the first project shown!
