@@ -64,5 +64,30 @@ const LABELS = {
 		&.secondary {
 			stroke: var(--accent-dark);
 		}
+
+		path {
+			animation: writeOn 3s ease-out normal paused;
+			stroke-dasharray: 200;
+		}
+
+		&:hover {
+			path {
+				animation-play-state: running;
+			}
+		}
+	}
+
+	@keyframes writeOn {
+		0% {
+			stroke-dashoffset: 0;
+		}
+
+		50% {
+			stroke-dashoffset: 195;
+		}
+
+		100% {
+			stroke-dashoffset: 0;
+		}
 	}
 </style>
