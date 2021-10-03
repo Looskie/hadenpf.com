@@ -1,5 +1,6 @@
 ---
 import Navigation from '$organisms/Navigation.astro'
+import PageFooter from '$organisms/PageFooter.astro'
 import WidthContainer from '$utils/WidthContainer.astro'
 
 import '../assets/base.css'
@@ -28,15 +29,22 @@ const { title: pageTitle } = Astro.props.content || {}
 			Skip to navigation
 		</a>
 
-		<WidthContainer>
-			<Navigation id="main-navigation" />
-		</WidthContainer>
+		<div
+			class="pageInset"
+			style="flex: 1 0"
+		>
+			<WidthContainer>
+				<Navigation id="main-navigation" />
+			</WidthContainer>
 
-		<WidthContainer>
-			<main id="main-content">
-				<slot />
-			</main>
-		</WidthContainer>
+			<WidthContainer>
+				<main id="main-content">
+					<slot />
+				</main>
+			</WidthContainer>
+		</div>
+
+		<PageFooter />
 	</body>
 </html>
 
