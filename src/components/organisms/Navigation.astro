@@ -85,7 +85,7 @@ const currentPath = Astro.request.url.pathname
 			color: var(--secondary-b);
 
 			&:first-child {
-				margin-left: -12px;
+				margin-left: calc(-1 * var(--content-inset));
 			}
 
 			a {
