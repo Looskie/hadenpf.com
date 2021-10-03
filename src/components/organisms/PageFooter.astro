@@ -20,7 +20,8 @@ const {
 		<WidthContainer>
 			{publishDate && (
 				<p>
-					This page was published {publishDate.toLocaleDateString()}
+					This page was published
+					{publishDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric' })}.
 				</p>
 			)}
 			
