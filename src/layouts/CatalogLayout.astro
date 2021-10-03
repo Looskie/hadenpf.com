@@ -13,6 +13,7 @@ export interface Props {
 
 		title: string
 		subtitle?: string
+		featured?: boolean
 	}[];
 }
 
@@ -59,7 +60,7 @@ const content = pages.map((page) => {
 		{content.map(async (page, i) => {
 			return (
 				<DisplayCard
-					featured={i === 0}
+					featured={page.featured}
 					title={page.title}
 					subtitle={page.subtitle}
 					link={page.url}
