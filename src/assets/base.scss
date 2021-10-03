@@ -49,9 +49,13 @@ p {
 	margin: 0 0 12px 0;
 }
 
-article a {
+p a {
 	color: var(--accent);
-	text-decoration: none;
+	text-decoration: underline;
+
+	&:hover {
+		color: var(--accent-dark);
+	}
 
 	@media print {
 		color: inherit;
@@ -63,11 +67,6 @@ article a {
 			font-weight: 400;
 			padding-left: 8px;
 		}
-	}
-
-	&:hover,
-	&:focus {
-		text-decoration: underline;
 	}
 }
 
