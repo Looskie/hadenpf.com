@@ -1,59 +1,8 @@
 ---
-import BaseLayout from '$layouts/BaseLayout.astro'
-import Headline from '$atoms/Headline'
-import DisplayCard from '$organisms/DisplayCard.astro'
+import CatalogLayout from '$layouts/CatalogLayout.astro'
 
-const { title, subtitle } = Object.assign({}, Astro.props, Astro.props.content)
-
-const content = Astro.fetchContent('../pages/projects/*/index.md').map((page) => {
-	const pathSegments: string[] = page.url.split('/')
-
-	if(pathSegments[pathSegments.length - 1] === 'index')
-		pathSegments.pop() // remove last 'index' path segment
-
-	const slug = pathSegments[pathSegments.length - 1]
-
-	return {
-		...page,
-		slug
-	}
-})
+const props = Object.assign({}, Astro.props, Astro.props.content)
+const pages = Astro.fetchContent('../pages/projects/*/index.md')
 ---
 
-<BaseLayout title={title}>
-	<header>
-		<Headline
-			title={title}
-			subtitle={subtitle}
-			punctuate="title"
-			highlight
-		/>
-	</header>
-
-	<div class="projectList">
-		{content.map(async (page, i) => {
-			return (
-				<DisplayCard
-					featured={i === 0}
-					title={page.title}
-					subtitle={page.subtitle}
-					link={page.url}
-					image={`/assets/projects/${page.slug}/card.png`}
-				/>
-			)
-		})}
-	</div>
-</BaseLayout>
-
-<style lang="scss">
-	.projectList {
-		display: grid;
-		grid-template-columns: 1fr;
-
-		@media screen and (min-width: 769px) {
-			grid-template-columns: 1fr 1fr;
-
-			column-gap: calc(18px * 2);
-		}
-	}
-</style>
+<CatalogLayout {...props} pages={pages} />
