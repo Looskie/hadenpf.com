@@ -1,6 +1,9 @@
 ---
 title: Words
-layout: $layouts/BaseLayout.astro
+subtitle: A place for notes and thoughts.
+layout: $layouts/PostCatalogLayout.astro
 ---
 
-The Posting
+I also post less-_word_-y things on [Twitter].
+
+[twitter]: https://twitter.com/hadenpf
