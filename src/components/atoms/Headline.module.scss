@@ -27,6 +27,10 @@
 		}
 	}
 
+	.title[href] {
+		z-index: 3;
+	}
+
 	> span {
 		&.subtitle {
 			font-weight: 400;

@@ -7,6 +7,8 @@ export interface HeadlineProps {
 	subtitle?: string
 	punctuate?: null | 'title' | 'subtitle' | 'both'
 
+	titleLink?: string
+
 	small?: boolean
 	highlight?: boolean
 	noSpacing?: boolean
@@ -17,6 +19,7 @@ const Headline: React.FC<HeadlineProps> = (props) => {
 		title,
 		subtitle,
 		punctuate,
+		titleLink,
 		highlight = false,
 		noSpacing = false,
 		small = false,
@@ -32,10 +35,17 @@ const Headline: React.FC<HeadlineProps> = (props) => {
 			})}
 			{...rest}
 		>
-			<span className={styles.title}>
-				{title}
-				{['title', 'both'].includes(punctuate) && '.'}{' '}
-			</span>
+			{!!titleLink ? (
+				<a className={styles.title} href={titleLink}>
+					{title}
+					{['title', 'both'].includes(punctuate) && '.'}{' '}
+				</a>
+			) : (
+				<span className={styles.title}>
+					{title}
+					{['title', 'both'].includes(punctuate) && '.'}{' '}
+				</span>
+			)}
 			{subtitle && (
 				<span className={styles.subtitle}>
 					{' '}

@@ -8,27 +8,47 @@ export interface Props {
 	image?: string
 }
 
+import classNames from 'classnames'
+
 import Headline from '$atoms/Headline'
 import Icon from '$atoms/Icon.astro'
 
-const { title, subtitle, link = '/', featured = false, image } = Astro.props
+let {
+	title,
+	subtitle,
+	link = '/',
+	featured = false,
+	image
+} = Astro.props
+
+if((/\/index\/?$/g).test(link)) {
+	const linkSegments = link.split('/')
+	linkSegments.pop() // remove the 'index' segment from our link
+
+	link = linkSegments.join('/')
+}
 ---
 
 <div
 	style={`background-image: url('${image}');`}
-	class="displayCard"
+	class={classNames([
+		"displayCard",
+		{
+			featured
+		}
+	])}
 >
-	<a href={link} class="clickableOverlay" />
+	<a href={link} class="clickableOverlay" tabindex={-1} />
 	<div class="content">
 		{featured && (
 			<div class="tag">
 				Featured
 			</div>
 		)}
-		<a href={link} class="cta">
-			<Headline small noSpacing title={title} subtitle={subtitle} />
+		<div class="cta">
+			<Headline small noSpacing title={title} subtitle={subtitle} titleLink={link} />
 			<Icon name="chevron-right" size={30} />
-		</a>
+		</div>
 	</div>
 </div>
 
@@ -61,6 +81,10 @@ const { title, subtitle, link = '/', featured = false, image } = Astro.props
 
 	position: relative;
 
+	&.featured {
+		grid-column: 1 / span 2;
+	}
+
 	.clickableOverlay {
 		position: absolute;
 		
@@ -72,11 +96,11 @@ const { title, subtitle, link = '/', featured = false, image } = Astro.props
 		width: 100%;
 		height: 100%;
 
-		z-index: 1;
+		z-index: 2;
 	}
 
 	.content {
-		z-index: 2;
+		z-index: 1;
 
 		display: flex;
 		justify-self: flex-end;
@@ -112,7 +136,11 @@ const { title, subtitle, link = '/', featured = false, image } = Astro.props
 
 			flex-flow: row nowrap;
 			justify-content: space-between;
-			align-items: flex-start;
+			align-items: center;
+		}
+
+		.link {
+			z-index: 3;
 		}
 	}
 }
