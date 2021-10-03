@@ -1,6 +1,13 @@
 {
 	"moduleResolution": "node",
 	"compilerOptions": {
-		"jsx": "react"
+		"jsx": "react",
+		"paths": {
+			"$atoms/*": ["./src/components/atoms/*"],
+			"$molecules/*": ["./src/components/molecules/*"],
+			"$organisms/*": ["./src/components/organisms/*"],
+			"$utils/*": ["./src/components/utils/*"],
+			"$public/*": ["./src/components/public/*"]
+		}
 	}
 }

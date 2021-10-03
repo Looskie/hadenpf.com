@@ -1,0 +1,90 @@
+---
+/**
+ * This is a template for different types of catalog sub-layouts (e.g. PostCatalogLayout, ProjectCatalogLayout, ...).
+ * This applies general abstractions that may apply to a general list layout, and is not intended to be used as a layout on its own.
+ */
+
+export interface Props {
+	title: string;
+	subtitle: string;
+
+	pages: {
+		url: string
+
+		title: string
+		subtitle?: string
+		featured?: boolean
+
+		published?: boolean
+	}[];
+}
+
+import BaseLayout from '$layouts/BaseLayout.astro'
+import Headline from '$atoms/Headline'
+import DisplayCard from '$organisms/DisplayCard.astro'
+
+const {
+	title,
+	subtitle,
+	pages
+}: Props = Object.assign({}, Astro.props, Astro.props.content)
+
+let sectionPath: string
+
+const content = pages.filter((page) => process.env.npm_lifecycle_event === 'dev' || !!page.published).map((page) => {
+	const pathSegments: string[] = page.url.split('/')
+
+	if(/\/index\/?$/g.test(page.url))
+		pathSegments.pop() // remove last 'index' path segment
+
+	const slug = pathSegments[pathSegments.length - 1]
+
+	if(!sectionPath)
+		sectionPath = pathSegments.slice(1, -1).join('/')
+
+	return {
+		...page,
+		slug
+	}
+})
+---
+
+<BaseLayout title={title}>
+	<header>
+		<Headline
+			title={title + '.'}
+			subtitle={subtitle}
+			punctuate="title"
+			highlight
+		/>
+
+		<slot />
+	</header>
+
+	<div class="catalogList">
+		{content.map(async (page, i) => {
+			return (
+				<DisplayCard
+					featured={page.featured}
+					title={page.title}
+					subtitle={page.subtitle}
+					link={page.url}
+					image={`/assets/${sectionPath}/${page.slug}/card.png`}
+				/>
+			)
+		})}
+	</div>
+</BaseLayout>
+
+<style lang="scss">
+	.catalogList {
+		display: grid;
+		grid-template-columns: 1fr;
+
+		@media screen and (min-width: 769px) {
+			grid-template-columns: 1fr 1fr;
+
+			column-gap: calc(18px * 2);
+		}
+	}
+</style>

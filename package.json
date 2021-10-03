@@ -1,18 +1,27 @@
 {
-	"name": "@example/starter",
+	"name": "hadenpf.com",
 	"version": "0.0.1",
 	"private": true,
 	"scripts": {
 		"dev": "astro dev",
-		"start": "astro dev",
+		"start": "astro preview",
 		"build": "astro build"
 	},
 	"devDependencies": {
-		"@astrojs/renderer-react": "^0.2.0",
+		"@astrojs/renderer-react": "^0.2.1",
+		"@babel/core": "^7.15.5",
+		"@types/classnames": "^2.3.1",
+		"@types/feather-icons": "^4.7.0",
+		"@types/node": "^16.10.1",
 		"@types/react": "^17.0.19",
-		"astro": "^0.19.1"
+		"astro": "^0.20.8",
+		"babel-loader": "^8.2.2",
+		"typescript": "^4.4.2"
 	},
 	"dependencies": {
-		"react": "^17.0.2"
+		"classnames": "^2.3.1",
+		"feather-icons": "^4.28.0",
+		"react": "^17.0.2",
+		"react-dom": "^17.0.2"
 	}
 }

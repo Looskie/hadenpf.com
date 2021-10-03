@@ -1,0 +1,17 @@
+<div class="widthContainer">
+	<slot />
+</div>
+
+<style lang="scss">
+	.widthContainer {
+		display: flex;
+		flex-flow: column nowrap;
+		flex-grow: 1;
+		align-self: stretch;
+
+		max-width: 768px;
+		margin: 0 auto;
+
+		align-items: stretch;
+	}
+</style>

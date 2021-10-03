@@ -1,20 +1,28 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro'
-import ArticleHeader from '../components/Article/ArticleHeader.astro'
+const title = 'Haden Fletcher'
 
-import Markdown from 'astro/components/Markdown.astro'
+import HeyoMark from '$atoms/HeyoMark'
 
-const title = 'Haden Fletcher';
+import { Markdown } from 'astro/components'
+import Header from '$molecules/AvatarHeadline'
+import SocialList from '$molecules/SocialList'
+
+import Layout from '$layouts/BaseLayout.astro'
 ---
 
-<BaseLayout title={title}>
-	<article>
-		<ArticleHeader title="Hello! 👋" />
+<Layout title={title}>
+	<Header avatar="/avi.png" title="Haden Fletcher." subtitle="Software Engineer" punctuate="title" />
 
-		<Markdown>
-			I'm still working on content for this page. 🚧
+	<Markdown>
+		Hey, welcome to my new site! I'm currently writing it from the ground up using [Astro].
+		
+		I’m a Kansas City-based, UX-focused, accessibility-dedicated, code-quality-focused software engineer (in that order) with a specialty in frontend code using React and TypeScript.
+		
+		You can expect some more exciting things on this site fairly soon — I'm currently putting together all the pieces needed to show dynamic content, all in my spare time —
+		so it doesn't get all my love and attention right now.
 
-			Please feel free to check out the [Playground](/playground) while I work on the rest of the site...
-		</Markdown>
-	</article>
-</BaseLayout>
+		[astro]: https://astro.build
+	</Markdown>
+
+	<SocialList />
+</Layout>

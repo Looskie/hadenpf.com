@@ -1,0 +1,112 @@
+---
+import HeyoMark from  '$atoms/HeyoMark.astro'
+
+export interface Props {
+	items?: Array<{
+		text: string;
+		link: string;
+		target?: string;
+	}>;
+
+	id: string;
+}
+
+const {
+	items = [
+		{
+			link: '/',
+			text: 'Home'
+		},
+		{
+			link: '/projects',
+			text: 'Projects',
+		},
+		{
+			link: '/words',
+			text: 'Words',
+		},
+	],
+	id,
+} = Astro.props ?? {}
+
+const currentPath = Astro.request.url.pathname
+---
+
+<nav id={id} data-ignore-this="">
+	<ul>
+		{items.map((item, index) => (
+			<li>
+				<a class={currentPath.startsWith(item.link) ? 'active' : null} href={item.link} target={item.target}>
+					{index === 0 ? (
+						<HeyoMark
+							id={`${id}.heyoIcon`}
+							alt={item.text}
+							primary={currentPath === item.link}
+						/>
+					) : item.text}
+				</a>
+			</li>
+		))}
+	</ul>
+</nav>
+
+<style lang="scss">
+	nav {
+		margin-top: 64px;
+		margin-bottom: 46px;
+		padding: var(--content-inset);
+
+		@media screen and (max-width: 768px) {
+			margin-top: 0;
+			margin-bottom: 28px;
+		}
+	}
+
+	ul {
+		flex: 0 0;
+
+		display: flex;
+		flex-flow: row nowrap;
+		justify-items: center;
+		align-items: center;
+
+		list-style: none;
+		padding: 0;
+		margin: 0;
+
+		li {
+			display: inline-flex;
+
+			font-size: 16px;
+			line-height: 20px;
+			font-weight: 500;
+			text-transform: uppercase;
+
+			color: var(--secondary-b);
+
+			&:first-child {
+				margin-left: calc(-1 * var(--content-inset));
+			}
+
+			a {
+				display: inline-flex;
+
+				padding: 12px;
+
+				@media screen and (pointer: coarse) {
+					padding: 18px;
+				}
+
+				text-decoration-color: var(--accent);
+				vertical-align: baseline;
+
+				outline-offset: -10px;
+
+				&.active {
+					font-weight: 600;
+					color: var(--primary-a);
+				}
+			}
+		}
+	}
+</style>

@@ -1,0 +1,45 @@
+---
+import WidthContainer from '$utils/WidthContainer.astro';
+
+// get the current year (this runs at build time and passes into component to be statically generated)
+const currentYear = new Date().getFullYear()
+---
+
+<footer class="pageFooter">
+	<div class="pageInset">
+		<WidthContainer>
+			<!-- <hr class="separator" aria-hidden="true" /> -->
+			
+			&copy; {currentYear.toString()} Haden Fletcher. All rights reserved.
+		</WidthContainer>
+	</div>
+</footer>
+
+<style lang="scss">
+.pageFooter {
+	margin-top: 32px;
+
+	padding-top: 32px;
+	padding-bottom: 32px;
+
+	padding-left: var(--content-inset);
+	padding-right: var(--content-inset);
+
+	background: var(--secondary-ul);
+	color: var(--secondary-b);
+	font-weight: 500;
+	font-size: 14px;
+}
+
+.separator {
+	margin-bottom: 32px;
+
+	display: flex;
+
+	border: 0;
+	border-bottom: 1px solid var(--secondary-a);
+
+	height: 1px;
+	padding: 0;
+}
+</style>

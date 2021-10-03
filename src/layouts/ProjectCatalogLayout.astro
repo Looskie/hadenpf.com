@@ -1,0 +1,10 @@
+---
+import CatalogLayout from '$layouts/CatalogLayout.astro'
+
+const props = Object.assign({}, Astro.props, Astro.props.content)
+const pages = Astro.fetchContent('../pages/projects/*/index.md')
+---
+
+<CatalogLayout {...props} pages={pages}>
+	<slot />
+</CatalogLayout>

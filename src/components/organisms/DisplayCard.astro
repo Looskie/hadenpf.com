@@ -1,0 +1,155 @@
+---
+export interface Props {
+	title: string
+	subtitle: string
+	featured?: boolean
+
+	link?: string;
+	image?: string
+}
+
+import classNames from 'classnames'
+
+import Headline from '$atoms/Headline'
+import Icon from '$atoms/Icon.astro'
+
+let {
+	title,
+	subtitle,
+	link = '/',
+	featured = false,
+	image
+} = Astro.props
+
+if((/\/index\/?$/g).test(link)) {
+	const linkSegments = link.split('/')
+	linkSegments.pop() // remove the 'index' segment from our link
+
+	link = linkSegments.join('/')
+}
+---
+
+<div
+	style={`background-image: url('${image}');`}
+	class={classNames([
+		"displayCard",
+		{
+			featured
+		}
+	])}
+>
+	<a href={link} class="clickableOverlay" aria-hidden="true" tabindex={-1} />
+	<div class="content">
+		{featured && (
+			<div class="tag">
+				Featured
+			</div>
+		)}
+		<div class="cta">
+			<Headline component="h2" small noSpacing title={title} subtitle={subtitle} titleLink={link} />
+			<Icon name="chevron-right" size={30} />
+		</div>
+	</div>
+</div>
+
+<style lang="scss">
+.displayCard {
+	--primary-a: #fff;
+	--secondary-b: rgba(255, 255, 255, 0.7);
+
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+	align-items: flex-start;
+	padding: 24px;
+
+	width: calc(100% + (2 * var(--content-inset)));
+	margin-left: calc(-1 * var(--content-inset));
+	margin-right: calc(-1 * var(--content-inset));
+
+	background-color: black;
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size: cover;
+	color: white;
+	height: 294px;
+
+	padding: 18px;
+	padding-left: 24px;
+
+	margin-top: 18px;
+
+	position: relative;
+
+	&.featured {
+		grid-column: 1 / span 2;
+	}
+
+	.clickableOverlay {
+		position: absolute;
+		
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		
+		width: 100%;
+		height: 100%;
+
+		z-index: 2;
+		outline-color: transparent;
+	}
+
+	.content {
+		z-index: 1;
+
+		display: flex;
+		justify-self: flex-end;
+		align-self: stretch;
+
+		flex-flow: column nowrap;
+
+		.tag {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+
+			padding: 4px 10px;
+
+			margin-left: -6px;
+			margin-bottom: 12px;
+
+			border-radius: 24px;
+			border: 1px solid currentColor;
+
+			text-transform: uppercase;
+			font-size: 14px;
+			line-height: 18px;
+
+			align-self: flex-start;
+		}
+
+		.cta {
+			display: flex;
+			width: 100%;
+
+			flex-flow: row nowrap;
+			justify-content: space-between;
+			align-items: center;
+		}
+
+		.link {
+			z-index: 3;
+		}
+	}
+}
+</style>
+
+<style lang="scss" global>
+.displayCard {
+	:focus {
+		outline-color: red;
+		outline-style: dotted;
+	}
+}
+</style>
