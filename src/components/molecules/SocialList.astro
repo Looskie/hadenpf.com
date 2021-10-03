@@ -34,7 +34,7 @@ const { items = DEFAULT_SOCIAL_LIST } = Astro.props
 	{items.map((item) => (
 		<li>
 			<a href={item.url} target="_self">
-				<Icon name={item.icon} size={22} />
+				<Icon name={item.icon} alt={item.alt} size={22} />
 			</a>
 		</li>
 	))}

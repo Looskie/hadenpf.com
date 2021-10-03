@@ -1,6 +1,7 @@
 ---
 export interface Props {
 	name: string;
+	alt?: string;
 	size?: number;
 	width?: number;
 	height?: number;
@@ -17,6 +18,7 @@ import * as feather from 'feather-icons'
 
 const {
 	name: iconName,
+	alt,
 	size = 24,
 	width = size,
 	height = size,
@@ -49,6 +51,19 @@ async function resolveCustomIconPath(
 	return null
 }
 
+function injectAltText(svg: string, alt: string): string {
+	const openingTagRegex = /\<svg[^>]*\>/g
+	const openingTag = openingTagRegex.exec(svg)[0]
+
+	return svg
+		.replace(
+			openingTagRegex,
+			`\
+${openingTag}\
+<title>${alt}</title>`
+		)
+}
+
 async function getIconMarkup(iconName: string): Promise<string> {
 	const customIconPath = await resolveCustomIconPath(iconName)
 
@@ -62,15 +77,14 @@ async function getIconMarkup(iconName: string): Promise<string> {
 			// remove all <svg /> tags -- just leave the paths and all intact
 			.replace(/\<\/?svg[^>]*\>/g, '')
 
-		return `\
-<svg width="${width}" height="${height}" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-	${iconInner}
-</svg>`
+		const markup =
+`<svg width="${width}" height="${height}" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">` + iconInner + `</svg>`
+		return injectAltText(markup, alt)
 	} else {
 		if (iconName in feather.icons) {
 			const icon = feather.icons[iconName]
 
-			return icon
+			const markup = icon
 				.toSvg({
 					width,
 					height,
@@ -78,6 +92,8 @@ async function getIconMarkup(iconName: string): Promise<string> {
 					stroke,
 					'stroke-width': strokeWidth
 				})
+
+			return injectAltText(markup, alt)
 		}
 	}
 }
