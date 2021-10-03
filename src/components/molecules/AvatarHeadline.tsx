@@ -8,7 +8,7 @@ export interface AvatarHeadlineProps extends HeadlineProps {
 }
 
 const AvatarHeadline: React.FC<AvatarHeadlineProps> = (props) => {
-	const { avatar, title, subtitle, punctuate, ...rest } = props
+	const { avatar, title, subtitle, ...rest } = props
 
 	return (
 		<div className={styles.AvatarHeadline} {...rest}>
@@ -18,7 +18,6 @@ const AvatarHeadline: React.FC<AvatarHeadlineProps> = (props) => {
 				{...{
 					title,
 					subtitle,
-					punctuate,
 				}}
 			/>
 		</div>
