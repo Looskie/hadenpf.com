@@ -32,8 +32,14 @@ body {
 	padding-right: var(--page-inset);
 }
 
-article {
-	padding: var(--content-inset);
+.contentInset {
+	padding-left: var(--content-inset);
+	padding-right: var(--content-inset);
+}
+
+.pageInset.contentInset {
+	padding-left: calc(var(--page-inset) + var(--content-inset));
+	padding-right: calc(var(--page-inset) + var(--content-inset));
 }
 
 a {

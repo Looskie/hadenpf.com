@@ -50,7 +50,7 @@ const content = pages.filter((page) => process.env.npm_lifecycle_event === 'dev'
 ---
 
 <BaseLayout title={title}>
-	<header>
+	<header class="contentInset">
 		<Headline
 			title={title + '.'}
 			subtitle={subtitle}
@@ -61,7 +61,7 @@ const content = pages.filter((page) => process.env.npm_lifecycle_event === 'dev'
 		<slot />
 	</header>
 
-	<div class="catalogList">
+	<div class="catalogList contentInset">
 		{content.map(async (page, i) => {
 			return (
 				<DisplayCard

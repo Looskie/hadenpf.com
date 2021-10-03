@@ -18,16 +18,18 @@ const {
 <footer class="pageFooter">
 	<div class="pageInset">
 		<WidthContainer>
-			{publishDate && (
+			<div class="contentInset">
+				{publishDate && (
+					<p>
+						This page was published
+						{publishDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}.
+					</p>
+				)}
+				
 				<p>
-					This page was published
-					{publishDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}.
+					&copy; {currentYear.toString()} Haden Fletcher. All rights reserved.
 				</p>
-			)}
-			
-			<p>
-				&copy; {currentYear.toString()} Haden Fletcher. All rights reserved.
-			</p>
+			</div>
 		</WidthContainer>
 	</div>
 </footer>
@@ -38,9 +40,6 @@ const {
 
 	padding-top: 32px;
 	padding-bottom: 32px;
-
-	padding-left: var(--content-inset);
-	padding-right: var(--content-inset);
 
 	background: var(--secondary-ul);
 	color: var(--secondary-b);
