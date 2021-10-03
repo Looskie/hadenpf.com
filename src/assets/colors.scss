@@ -6,6 +6,8 @@ $primary-inverted-a: #ffffff;
 
 $secondary-a: #9d9d9d;
 $secondary-b: #7a7a7a;
+$secondary-l: #dadada;
+$secondary-ul: #f7f7f7;
 
 $accent: #650bda;
 $accent-light: #a866ff;
@@ -19,6 +21,8 @@ $accent-dark: #4800a6;
 
 	--secondary-a: #{$secondary-a};
 	--secondary-b: #{$secondary-b};
+	--secondary-l: #{$secondary-l};
+	--secondary-ul: #{$secondary-ul};
 
 	--accent: #{$accent};
 	--accent-light: #{$accent-light};
