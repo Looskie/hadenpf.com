@@ -1,9 +1,7 @@
 .Headline {
 	margin: 0 0 8px 0;
 
-	font-weight: 700;
 	font-size: 28px;
-	line-height: 1.15;
 
 	color: var(--primary-a);
 
@@ -11,12 +9,19 @@
 		display: inline-flex;
 		flex-flow: row wrap;
 
+		font-weight: 700;
+		line-height: 1;
+
 		gap: 0.3em;
+
+		@media screen and (max-width: 768px) {
+			flex-direction: column;
+			gap: 0.15em;
+		}
 	}
 
 	&.small {
 		font-size: 18px;
-		line-height: 1.1;
 	}
 
 	&.noSpacing {
@@ -32,10 +37,5 @@
 	.subtitle {
 		font-weight: 400;
 		color: var(--secondary-b);
-	}
-
-	@media screen and (max-width: 768px) {
-		flex-direction: column;
-		gap: 0;
 	}
 }
