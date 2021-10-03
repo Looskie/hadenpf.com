@@ -38,7 +38,7 @@ if((/\/index\/?$/g).test(link)) {
 		}
 	])}
 >
-	<a href={link} class="clickableOverlay" tabindex={-1} />
+	<a href={link} class="clickableOverlay" aria-hidden="true" tabindex={-1} />
 	<div class="content">
 		{featured && (
 			<div class="tag">
@@ -46,7 +46,7 @@ if((/\/index\/?$/g).test(link)) {
 			</div>
 		)}
 		<div class="cta">
-			<Headline small noSpacing title={title} subtitle={subtitle} titleLink={link} />
+			<Headline component="h2" small noSpacing title={title} subtitle={subtitle} titleLink={link} />
 			<Icon name="chevron-right" size={30} />
 		</div>
 	</div>
@@ -97,6 +97,7 @@ if((/\/index\/?$/g).test(link)) {
 		height: 100%;
 
 		z-index: 2;
+		outline-color: transparent;
 	}
 
 	.content {
@@ -126,8 +127,6 @@ if((/\/index\/?$/g).test(link)) {
 			line-height: 18px;
 
 			align-self: flex-start;
-
-			z-index: 0;
 		}
 
 		.cta {
@@ -142,6 +141,15 @@ if((/\/index\/?$/g).test(link)) {
 		.link {
 			z-index: 3;
 		}
+	}
+}
+</style>
+
+<style lang="scss" global>
+.displayCard {
+	:focus {
+		outline-color: red;
+		outline-style: dotted;
 	}
 }
 </style>
