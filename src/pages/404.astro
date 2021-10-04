@@ -1,0 +1,17 @@
+---
+import { Markdown } from 'astro/components'
+
+import Headline from '$atoms/Headline'
+
+import BaseLayout from '$layouts/BaseLayout.astro'
+---
+
+<BaseLayout title="404">
+	<div class="contentInset">
+		<Headline title="404." subtitle="This page doesn't exist." highlight />
+
+		<Markdown>
+			Try again from the [homepage](/) or one of the sections at the top of the page.
+		</Markdown>
+	</div>
+</BaseLayout>
