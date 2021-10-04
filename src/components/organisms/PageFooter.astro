@@ -46,8 +46,21 @@ const {
 	font-weight: 500;
 	font-size: 14px;
 
-	p:last-child {
-		margin-bottom: 0;
+	p {
+		margin-bottom: 12px;
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+
+	@media screen and (max-width: 768px) {
+		padding-top: 24px;
+		padding-bottom: 24px;
+
+		p {
+			margin-bottom: 8px;
+		}
 	}
 }
 
