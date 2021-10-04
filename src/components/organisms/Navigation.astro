@@ -75,6 +75,8 @@ const currentPath = Astro.request.url.pathname
 		margin: 0;
 
 		li {
+			--item-padding: var(--content-inset);
+
 			display: inline-flex;
 
 			font-size: 16px;
@@ -84,18 +86,18 @@ const currentPath = Astro.request.url.pathname
 
 			color: var(--secondary-b);
 
+			@media screen and (pointer: coarse) {
+				--item-padding: 18px;
+			}
+
 			&:first-child {
-				margin-left: calc(-1 * var(--content-inset));
+				margin-left: calc(-1 * var(--item-padding));
 			}
 
 			a {
 				display: inline-flex;
 
-				padding: 12px;
-
-				@media screen and (pointer: coarse) {
-					padding: 18px;
-				}
+				padding: var(--item-padding);
 
 				text-decoration-color: var(--accent);
 				vertical-align: baseline;
